@@ -65,12 +65,61 @@ public class planner{
 				
 				int choice = Integer.parseInt(sc.nextLine());
 				//begins the simulation
-				if(choice == 1){
+				boolean sprintTracker = true;
+				int timeCounter = 0;
+				sprint s = new sprint();
+				if (choice == 1){
 					
-					
+					s.addTask(t);
+					s.setSprintName("sprint 1");
+					s.addResource(r);
+					s.addResource(r);
+					s.addResource(r);
+					s.addResource(r);
+					s.addResource(r);
 					
 				}
-			
+				else if(choice == 2){
+					
+					s.addTask(t2);
+					s.setSprintName("sprint 1");
+					s.addResource(r);
+					s.addResource(r);
+					s.addResource(r);
+					s.addResource(r);
+					s.addResource(r);
+				}
+				else if(choice == 3){
+					
+					s.addTask(t3);
+					s.setSprintName("sprint 1");
+					s.addResource(r);
+					s.addResource(r);
+					s.addResource(r);
+					s.addResource(r);
+					s.addResource(r);
+				}
+				else{
+					runState = false;
+				}
+				int resourceAnalyse = s.getResourceCount();
+				String taskInProg = s.getActiveTaskName();
+				while (sprintTracker = true){
+					String atn = s.getActiveTaskName();
+					
+					System.out.printf("+-------------------------------------------------+\n" +
+									  "| Resources|    %d    |      0      |   0  |-------|\n" +
+									  "| Back Log | Analyse | In Progress | Test | Done  |\n" +
+									  "|          | %s  |             |      |       |\n" +
+									  "|          |         |             |      |       |\n" +
+									  "|          |         |             |      |       |\n", resourceAnalyse, atn );
+				
+					System.out.printf("Sprint begun: Press 1 to refresh \n" +
+									  "              Press 2 to add another task \n" + 
+									  "              Press 3 to move a task \n");
+					
+					int choice2 = Integer.parseInt(sc.nextLine());
+				}
 			}
 			else{
 				//closes the app

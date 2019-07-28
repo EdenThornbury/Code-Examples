@@ -11,7 +11,9 @@ public class sprint{
 	
 	public sprint(){
 		
+		sprintResources = new ArrayList<Resources>();
 		
+		sprintTasks = new ArrayList<Task>();
 		
 	}
 	
@@ -36,6 +38,31 @@ public class sprint{
 	public String getSprintName(){
 		
 		return sprintName;
+		
+	}
+	
+	public void addResource(Resources r1){
+		
+		sprintResources.add(r1);
+		
+	}
+	
+	public void addTask(Task t1){
+		
+		sprintTasks.add(t1);
+		
+	}
+	
+	public String getActiveTaskName(){
+		
+		Task t = sprintTasks.get(0);
+		return t.getTaskName();
+		
+	}
+	
+	public int getResourceCount(){
+		
+		return sprintResources.size();
 		
 	}
 	
