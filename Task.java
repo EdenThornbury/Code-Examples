@@ -2,7 +2,7 @@ import java.io.*;
 
 
 public class Task {
-	
+	// task class with value and duration elements
 	String taskName;
 	int taskDuration;
 	int taskValue;
@@ -11,14 +11,14 @@ public class Task {
 		
 		
 	}
-	
+	//constructors 
 	public Task(String name, int val, int dur){
 		
 		this.taskDuration = dur;
 		this.taskValue = val;
 		this.taskName = name;
 	}	
-	
+	// getters and setters
 	public void setTaskName(String name){
 	
 		this.taskName = name;

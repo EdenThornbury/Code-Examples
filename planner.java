@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.Scanner;
+// Author E.T
 
 public class planner{
 	
@@ -67,9 +68,10 @@ public class planner{
 				//begins the simulation
 				boolean sprintTracker = true;
 				int timeCounter = 0;
+				//creating a sprint object to store our resources and tasks
 				sprint s = new sprint();
 				if (choice == 1){
-					
+					//adding tasks and resources
 					s.addTask(t);
 					s.setSprintName("sprint 1");
 					s.addResource(r);
@@ -102,18 +104,19 @@ public class planner{
 				else{
 					runState = false;
 				}
+				
 				int resourceAnalyse = s.getResourceCount();
 				String taskInProg = s.getActiveTaskName();
 				while (sprintTracker = true){
 					String atn = s.getActiveTaskName();
-					
+					//formatting output table so it looks pretty
 					System.out.printf("+-------------------------------------------------+\n" +
 									  "| Resources|    %d    |      0      |   0  |-------|\n" +
 									  "| Back Log | Analyse | In Progress | Test | Done  |\n" +
 									  "|          | %s  |             |      |       |\n" +
 									  "|          |         |             |      |       |\n" +
 									  "|          |         |             |      |       |\n", resourceAnalyse, atn );
-				
+					// awaiting expansion - e.g adding functionality to the options
 					System.out.printf("Sprint begun: Press 1 to refresh \n" +
 									  "              Press 2 to add another task \n" + 
 									  "              Press 3 to move a task \n");

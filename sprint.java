@@ -3,12 +3,16 @@ import java.io.*;
 
 public class sprint{
 	
+	/* sprint class created with the ability to store our task objects
+	and resources objects in array lists */
+	
 	ArrayList<Resources> sprintResources;
 	
 	ArrayList<Task> sprintTasks;
 	
 	String sprintName;
 	
+	//constructor must initialise the array lists even when 'empty'
 	public sprint(){
 		
 		sprintResources = new ArrayList<Resources>();
@@ -28,7 +32,7 @@ public class sprint{
 		sprintTasks.add(t1);
 		
 	}
-	
+	//getters and setters
 	public void setSprintName(String name){
 		
 		this.sprintName = name;
@@ -46,7 +50,7 @@ public class sprint{
 		sprintResources.add(r1);
 		
 	}
-	
+	// adding tasks and resources
 	public void addTask(Task t1){
 		
 		sprintTasks.add(t1);
@@ -59,7 +63,7 @@ public class sprint{
 		return t.getTaskName();
 		
 	}
-	
+	// returning a count of the resources, in effect how many man hours avaliable
 	public int getResourceCount(){
 		
 		return sprintResources.size();
