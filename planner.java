@@ -14,6 +14,8 @@ public class planner{
 	public static void main (String args[]){
 		//creates a resource to be used in sprints with a productivity value of 1
 		Resources r = new Resources();
+		taskCard tcard = new taskCard();
+		layout l = new layout();
 		
 		r.setResourceName("Generic Resource");
 		r.setResourceProductivity(1);
@@ -79,6 +81,9 @@ public class planner{
 					s.addResource(r);
 					s.addResource(r);
 					s.addResource(r);
+					l.setTaskA(s.getActiveTaskName());
+					l.setResourceA(s.getResourceCount());
+					
 					
 				}
 				else if(choice == 2){
@@ -90,6 +95,8 @@ public class planner{
 					s.addResource(r);
 					s.addResource(r);
 					s.addResource(r);
+					l.setTaskA(s.getActiveTaskName());
+					l.setResourceA(s.getResourceCount());
 				}
 				else if(choice == 3){
 					
@@ -100,28 +107,68 @@ public class planner{
 					s.addResource(r);
 					s.addResource(r);
 					s.addResource(r);
+					l.setTaskA(s.getActiveTaskName());
+					l.setResourceA(s.getResourceCount());
 				}
 				else{
 					runState = false;
 				}
 				
-				int resourceAnalyse = s.getResourceCount();
-				String taskInProg = s.getActiveTaskName();
+				
 				while (sprintTracker = true){
-					String atn = s.getActiveTaskName();
+					
 					//formatting output table so it looks pretty
-					System.out.printf("+-------------------------------------------------+\n" +
-									  "| Resources|    %d    |      0      |   0  |-------|\n" +
-									  "| Back Log | Analyse | In Progress | Test | Done  |\n" +
-									  "|          | %s  |             |      |       |\n" +
-									  "|          |         |             |      |       |\n" +
-									  "|          |         |             |      |       |\n", resourceAnalyse, atn );
+					l.printLayout(s);
+					
 					// awaiting expansion - e.g adding functionality to the options
 					System.out.printf("Sprint begun: Press 1 to refresh \n" +
 									  "              Press 2 to add another task \n" + 
 									  "              Press 3 to move a task \n");
 					
 					int choice2 = Integer.parseInt(sc.nextLine());
+					
+					if (choice2 == 1){
+						
+					}
+					else if (choice2 == 2){
+						
+						tcard.printTaskCards();
+						
+						int choice3 = Integer.parseInt(sc.nextLine());
+						if (choice3 == 1){
+							s.addTask(t);
+						}
+						else if (choice3 == 2){
+							s.addTask(t2);
+						}
+						else if (choice3 == 3){
+							s.addTask(t3);
+						}
+					}
+					else if(choice2 == 3){
+						System.out.println("Which colomn would you like to switch?");
+						System.out.println("To move Analyse to In Progress enter 1");
+						System.out.println("To move In Progress to Test enter 2");
+						System.out.println("To move Test to Done enter 3");
+						int choice3 = Integer.parseInt(sc.nextLine());
+						
+						if (choice3 == 1){
+							l.setTaskA("      ");
+							l.setTaskB(s.getActiveTaskName());
+						}
+						else if (choice3 == 2){
+
+							l.setTaskB("      ");
+							l.setTaskC(s.getActiveTaskName());
+							
+						}
+						else if (choice3 == 2){
+
+							l.setTaskC("      ");
+							//l.setTaskC(s.getActiveTaskName());
+							
+						}
+					}
 				}
 			}
 			else{

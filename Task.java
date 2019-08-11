@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.Random;
+import java.util.ArrayList;
 
 
 public class Task {
@@ -6,7 +8,9 @@ public class Task {
 	String taskName;
 	int taskDuration;
 	int taskValue;
-	
+	Random rand = new Random();
+	ArrayList taskList = new ArrayList<Task>();
+	//generate list of tasks
 	public Task(){
 		
 		
