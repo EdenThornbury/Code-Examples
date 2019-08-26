@@ -16,7 +16,7 @@ public class planner{
 		Resources r = new Resources();
 		taskCard tcard = new taskCard();
 		layout l = new layout();
-		
+		int tasksRunning;
 		r.setResourceName("Generic Resource");
 		r.setResourceProductivity(1);
 		
@@ -42,83 +42,30 @@ public class planner{
 			
 			if(holder == 1){
 				//formatting task cards, currently hardcoded and awaiting expansion
-				Task t = new Task("task 1", 1, 2);
-				Task t2 = new Task("task 2", 2, 3);
-				Task t3 = new Task("task 3", 3, 4);
-				System.out.printf("+--------------------+\n" + 
-								  "+------" + t.getTaskName()+ "--------+\n" + 
-								  "+------value: " + t.getTaskValue() + "------+\n" +
-								  "+------duration: " + t.getTaskDuration() + "---+\n" + 
-								  "+--------------------+\n \n");
-								  
-				System.out.printf("+--------------------+\n" + 
-								  "+------" + t2.getTaskName()+ "--------+\n" + 
-								  "+------value: " + t2.getTaskValue() + "------+\n" +
-								  "+------duration: " + t2.getTaskDuration() + "---+\n" + 
-								  "+--------------------+\n \n");
-								  
-				System.out.printf("+--------------------+\n" + 
-								  "+------" + t3.getTaskName()+ "--------+\n" + 
-								  "+------value: " + t3.getTaskValue() + "------+\n" +
-								  "+------duration: " + t3.getTaskDuration() + "---+\n" + 
-								  "+--------------------+\n \n");
 								  
 				System.out.println("To start a new Sprint pick a task");
 				
 				
-				int choice = Integer.parseInt(sc.nextLine());
-				//begins the simulation
+				
 				boolean sprintTracker = true;
 				int timeCounter = 0;
 				//creating a sprint object to store our resources and tasks
 				sprint s = new sprint();
-				if (choice == 1){
-					//adding tasks and resources
-					s.addTask(t);
-					s.setSprintName("sprint 1");
-					s.addResource(r);
-					s.addResource(r);
-					s.addResource(r);
-					s.addResource(r);
-					s.addResource(r);
-					l.setTaskA(s.getActiveTaskName());
-					l.setResourceA(s.getResourceCount());
-					
-					
-				}
-				else if(choice == 2){
-					
-					s.addTask(t2);
-					s.setSprintName("sprint 1");
-					s.addResource(r);
-					s.addResource(r);
-					s.addResource(r);
-					s.addResource(r);
-					s.addResource(r);
-					l.setTaskA(s.getActiveTaskName());
-					l.setResourceA(s.getResourceCount());
-				}
-				else if(choice == 3){
-					
-					s.addTask(t3);
-					s.setSprintName("sprint 1");
-					s.addResource(r);
-					s.addResource(r);
-					s.addResource(r);
-					s.addResource(r);
-					s.addResource(r);
-					l.setTaskA(s.getActiveTaskName());
-					l.setResourceA(s.getResourceCount());
-				}
-				else{
-					runState = false;
-				}
+				s.addTask(tcard.printTaskCards());
+				s.addResource(r);
+				s.addResource(r);
+				s.addResource(r);
+				s.addResource(r);
+				s.addResource(r);
+				tasksRunning = 1;
+				l.setTaskA(s.getActiveTaskName(1));
+				l.setResourceA(s.getResourceCount());
 				
 				
 				while (sprintTracker = true){
 					
 					//formatting output table so it looks pretty
-					l.printLayout(s);
+					l.printLayout();
 					
 					// awaiting expansion - e.g adding functionality to the options
 					System.out.printf("Sprint begun: Press 1 to refresh \n" +
@@ -128,21 +75,124 @@ public class planner{
 					int choice2 = Integer.parseInt(sc.nextLine());
 					
 					if (choice2 == 1){
-						
+						if (tasksRunning == 1){
+							Task t = s.getTask(1);
+							t.setAnalyse();
+							l.setCompA("complete");
+						}
+						else if(tasksRunning == 2){
+							Task t1 = s.getTask(1);
+							Task t2 = s.getTask(2);
+							
+							if(t1.checkA() == true && t2.checkP() == false){
+								t2.setProgress();
+								l.setCompP("complete");
+								
+							}else if(t2.checkP() == true && t1.checkA() == false){
+								t1.setAnalyse();
+								l.setCompA("complete");
+							}
+							else if (t1.getTaskDuration() < t2.getTaskDuration()){
+								t1.setAnalyse();
+								l.setCompA("complete");
+							}
+							else if(t2.checkP() == true && t1.checkA() == true){
+								System.out.println("All Tasks complete");
+							}
+							else{
+								t2.setProgress();
+								l.setCompP("complete");
+							}
+						}
+						else{
+							Task t1 = s.getTask(1);
+							Task t2 = s.getTask(2);
+							Task t3 = s.getTask(3);
+							
+							if(t1.checkA() == true && t2.checkP() == false && t3.checkT() == true){
+								t2.setProgress();
+								l.setCompP("complete");
+								
+							}else if(t2.checkP() == true && t1.checkA() == false && t3.checkT() == true){
+								t1.setAnalyse();
+								l.setCompA("complete");
+							}
+							else if(t2.checkP() == true && t1.checkA() == true && t3.checkT() == false){
+								t3.setTest();
+								l.setCompT("complete");
+							}
+							
+							else if(t2.checkP() == true && t1.checkA() == true && t3.checkT() == true){
+								System.out.println("All Tasks complete");
+							}
+							else if (t1.checkA() == false && t2.checkP() == false && t3.checkT() == true){
+								if (t1.getTaskDuration() < t2.getTaskDuration()){
+									t1.setAnalyse();
+									l.setCompA("complete");
+								}
+								else{
+									t2.setAnalyse();
+									l.setCompP("complete");
+								}
+							}
+							else if (t1.checkA() == false && t2.checkP() == true && t3.checkT() == false){
+								if (t1.getTaskDuration() < t3.getTaskDuration()){
+									t1.setAnalyse();
+									l.setCompA("complete");
+								}
+								else{
+									t3.setTest();
+									l.setCompT("complete");
+								}
+							}
+							else if (t1.checkA() == true && t2.checkP() == false && t3.checkT() == false){
+								if (t2.getTaskDuration() < t3.getTaskDuration()){
+									t2.setProgress();
+									l.setCompP("complete");
+								}
+								else{
+									t3.setTest();
+									l.setCompT("complete");
+								}
+							}
+							else if (t1.checkA() == false && t2.checkP() == false && t3.checkT() == false){
+								if (t2.getTaskDuration() < t3.getTaskDuration() && t2.getTaskDuration() < t1.getTaskDuration()){
+									t2.setProgress();
+									l.setCompP("complete");
+								}
+								else if(t1.getTaskDuration() < t3.getTaskDuration() && t1.getTaskDuration() < t2.getTaskDuration()){
+									t1.setAnalyse();
+									l.setCompA("complete");
+								}
+								else if(t3.getTaskDuration() < t1.getTaskDuration() && t3.getTaskDuration() < t2.getTaskDuration()){
+									t3.setTest();
+									l.setCompT("complete");
+								}
+								else{
+									t3.setTest();
+									l.setCompT("complete");
+								}
+							}
+							
+							
+							else{
+								t2.setProgress();
+								l.setCompP("complete");
+							}
+						}
+							
 					}
 					else if (choice2 == 2){
 						
-						tcard.printTaskCards();
-						
-						int choice3 = Integer.parseInt(sc.nextLine());
-						if (choice3 == 1){
-							s.addTask(t);
+						if(s.getTask(1).checkA() == true){
+							s.addTask(tcard.printTaskCards());
+							tasksRunning = tasksRunning + 1;
+							l.setTaskA(s.getActiveTaskName(1));
+							l.setCompA("working ");
+							
 						}
-						else if (choice3 == 2){
-							s.addTask(t2);
-						}
-						else if (choice3 == 3){
-							s.addTask(t3);
+						else{
+							System.out.println("Please complete and move the currently working task");
 						}
 					}
 					else if(choice2 == 3){
@@ -153,13 +203,20 @@ public class planner{
 						int choice3 = Integer.parseInt(sc.nextLine());
 						
 						if (choice3 == 1){
+							
+							l.setCompA("        ");
 							l.setTaskA("      ");
-							l.setTaskB(s.getActiveTaskName());
+							l.setTaskB(s.getActiveTaskName(1));
+							l.setCompP("working ");
+							s.setInProgress(s.getTask(1));
+							
 						}
 						else if (choice3 == 2){
 
 							l.setTaskB("      ");
-							l.setTaskC(s.getActiveTaskName());
+							l.setTaskC(s.getActiveTaskName(2));
+							l.setCompT("working ");
+							s.setTest(s.getTask(2));
 							
 						}
 						else if (choice3 == 2){

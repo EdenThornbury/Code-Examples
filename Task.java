@@ -10,6 +10,9 @@ public class Task {
 	int taskValue;
 	Random rand = new Random();
 	ArrayList taskList = new ArrayList<Task>();
+	boolean analyse = false;
+	boolean inProgress = false;
+	boolean test = false;
 	//generate list of tasks
 	public Task(){
 		
@@ -56,6 +59,37 @@ public class Task {
 	public int getTaskValue(){
 		
 		return this.taskValue;
+		
+	}
+	
+	public void setAnalyse(){
+	
+		this.analyse = true;
+		
+	}
+	
+	public boolean checkA(){
+		return analyse;
+	}
+	
+	public boolean checkP(){
+		return inProgress;
+	}
+	
+	public boolean checkT(){
+		return test;
+	}
+	
+	
+	public void setProgress(){
+	
+		this.inProgress = true;
+		
+	}
+	
+	public void setTest(){
+	
+		this.test = true;
 		
 	}
 	

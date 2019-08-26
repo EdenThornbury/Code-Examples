@@ -8,7 +8,9 @@ public class sprint{
 	
 	ArrayList<Resources> sprintResources;
 	
-	ArrayList<Task> sprintTasks;
+	Task analyse;
+	Task inProgress;
+	Task Test;
 	
 	String sprintName;
 	
@@ -17,7 +19,7 @@ public class sprint{
 		
 		sprintResources = new ArrayList<Resources>();
 		
-		sprintTasks = new ArrayList<Task>();
+		
 		
 	}
 	
@@ -25,12 +27,19 @@ public class sprint{
 		
 		sprintResources = new ArrayList<Resources>();
 		
-		sprintTasks = new ArrayList<Task>();
+		analyse = t1;
 		
 		sprintResources.add(r1);
 		
-		sprintTasks.add(t1);
-		
+	}
+	public void setAnalyse(Task t1){
+		analyse = t1;
+	}
+		public void setInProgress(Task t1){
+		inProgress = t1;
+	}
+		public void setTest(Task t1){
+		Test = t1;
 	}
 	//getters and setters
 	public void setSprintName(String name){
@@ -53,15 +62,49 @@ public class sprint{
 	// adding tasks and resources
 	public void addTask(Task t1){
 		
-		sprintTasks.add(t1);
+		analyse = t1;
 		
 	}
 	
-	public String getActiveTaskName(){
+	public int getDuration(int a){
 		
-		Task t = sprintTasks.get(0);
-		return t.getTaskName();
+		if (a ==1 ){
+			return analyse.getTaskDuration();
+		}
+		else if(a == 2){
+			return inProgress.getTaskDuration();
+		}
+		else{
+			return Test.getTaskDuration();
+		}
 		
+	}
+	
+	public String getActiveTaskName(int a){
+		
+		if (a ==1 ){
+			return analyse.getTaskName();
+		}
+		else if(a == 2){
+			return inProgress.getTaskName();
+		}
+		else{
+			return Test.getTaskName();
+		}
+		
+	}
+
+	
+	public Task getTask(int a){
+		if (a ==1 ){
+			return analyse;
+		}
+		else if(a == 2){
+			return inProgress;
+		}
+		else{
+			return Test;
+		}
 	}
 	// returning a count of the resources, in effect how many man hours avaliable
 	public int getResourceCount(){
